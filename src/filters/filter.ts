@@ -1,5 +1,5 @@
-import { PackageDetails } from '../package-details';
+import { PackageDetails } from '../npm-interfaces/package-details';
 
-export default abstract class Filter {
-  abstract filter(packageDetails: PackageDetails): boolean;
+export default interface Filter {
+  filter(packageDetails: PackageDetails): boolean;
 }

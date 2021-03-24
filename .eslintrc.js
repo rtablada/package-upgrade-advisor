@@ -19,5 +19,6 @@ module.exports = {
     'import/no-unresolved': 0,
     'class-methods-use-this': 0,
     'no-shadow': 0,
+    'max-classes-per-file': 0,
   },
 };

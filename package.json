@@ -4,11 +4,18 @@
     "email": "ryan.tablada+npm@gmail.com",
     "name": "Ryan Tablada"
   },
+  "scripts": {
+    "build:dev": "tsc -p tsconfig.json --watch"
+  },
+  "bin": {
+    "package-upgrade-helper": "bin.js"
+  },
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
   "devDependencies": {
     "@types/node-fetch": "^2.5.8",
+    "@types/yargs": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
     "eslint": "^7.22.0",
@@ -17,6 +24,8 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "json-to-ts": "^1.7.0",
+    "node-fetch": "^2.6.1",
+    "yargs": "^16.2.0"
   }
 }
