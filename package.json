@@ -1,0 +1,22 @@
+{
+  "name": "package-upgrade-helper",
+  "author": {
+    "email": "ryan.tablada+npm@gmail.com",
+    "name": "Ryan Tablada"
+  },
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
