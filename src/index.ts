@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import Table from 'cli-table';
+import npm from 'npm';
 import Filter from './filters/filter';
 import { NpmPackageDetails } from './npm-interfaces/package-details';
 import { OutputColumn } from './output-columns';
@@ -41,6 +42,7 @@ export class PackageUpgraderConfig {
     packageJson: PackageJson,
     outputType: 'csv' | 'console' = this.options.defaultOutputType ?? 'console',
   ) {
+    await new Promise((resolve) => npm.load(resolve));
     const packageDetails = [
       ...(await this.packageDetails(packageJson.dependencies, 'dependencies')),
       ...(await this.packageDetails(packageJson.devDependencies, 'dev-dependencies')),
@@ -84,7 +86,7 @@ export class PackageUpgraderConfig {
 
     return Promise.all(packageNames.map(async (packageName) => ({
       packageName,
-      version: dependencies[packageName],
+      requestedVersion: dependencies[packageName],
       dependencyType,
       npmDetails: await this.loadNpmDetails(packageName),
     })));

@@ -1,4 +1,6 @@
 import semver from 'semver';
+import npm from 'npm';
+import { NpmPackageDetails } from '../npm-interfaces/package-details';
 import { PackageDetail } from '../package-detail';
 
 export abstract class OutputColumn {
@@ -29,7 +31,7 @@ export class RequiredVersionColumn extends OutputColumn {
   headerText = 'Required Version';
 
   getRowText(detail: PackageDetail): string {
-    return detail.version;
+    return detail.requestedVersion;
   }
 
   getStatus = () => undefined;
@@ -38,7 +40,7 @@ export class RequiredVersionColumn extends OutputColumn {
 export class LatestVersionColumn extends OutputColumn {
   changeStatus: boolean;
 
-  constructor(changeStatus = false) {
+  constructor(changeStatus = true) {
     super();
     this.changeStatus = changeStatus;
   }
@@ -55,7 +57,7 @@ export class LatestVersionColumn extends OutputColumn {
       return undefined;
     }
 
-    const currentVersion = detail.version;
+    const currentVersion = detail.requestedVersion;
     const latestVersion = detail.npmDetails['dist-tags'].latest;
 
     if (!semver.valid(currentVersion) || !semver.valid(latestVersion)) {
@@ -74,5 +76,35 @@ export class LatestVersionColumn extends OutputColumn {
         return 'highlight';
       default: return 'success';
     }
+  }
+}
+
+export class DependencyColumn extends OutputColumn {
+  packageName: string;
+
+  changeStatus: boolean;
+
+  constructor(packageName: string, changeStatus = true) {
+    super();
+    this.packageName = packageName;
+    this.changeStatus = changeStatus;
+  }
+
+  get headerText() {
+    return this.packageName;
+  }
+
+  private getDependencyVersion(detail: PackageDetail, version: string) {
+    const versionInfo = detail.npmDetails.versions[version];
+
+    return (versionInfo.dependencies ?? {})[this.packageName] ?? (versionInfo.devDependencies ?? {})[this.packageName] ?? 'N/A';
+  }
+
+  getRowText(detail: PackageDetail): string {
+    return this.getDependencyVersion(detail, detail.requestedVersion);
+  }
+
+  getStatus(detail: PackageDetail): 'success' | 'alert' | 'caution' | 'warning' | 'highlight' {
+    throw new Error('Method not implemented.');
   }
 }
