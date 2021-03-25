@@ -1,4 +1,4 @@
-import { PackageDetails } from '../npm-interfaces/package-details';
+import { PackageDetail } from '../package-detail';
 import Filter from './filter';
 
 export default abstract class OptionsFilter implements Filter {
@@ -10,16 +10,16 @@ export default abstract class OptionsFilter implements Filter {
 
   packageNameRegex : undefined | RegExp = undefined;
 
-  private filterByRegex(packageDetails: PackageDetails) {
+  private filterByRegex(packageDetails: PackageDetail) {
     return this.packageNameRegex !== undefined
-      && !!packageDetails.name.match(this.packageNameRegex);
+      && !!packageDetails.packageName.match(this.packageNameRegex);
   }
 
-  filter(packageDetails: PackageDetails) : boolean {
+  filter(packageDetails: PackageDetail) : boolean {
     let result: boolean = false;
 
-    result = this.packageNames.includes(packageDetails.name)
-      || this.keywords.some((keyword) => packageDetails.keywords.includes(keyword))
+    result = this.packageNames.includes(packageDetails.packageName)
+      || this.keywords.some((keyword) => packageDetails.npmDetails.keywords.includes(keyword))
       || this.filterByRegex(packageDetails);
 
     return this.mode === 'allow' ? result : !result;

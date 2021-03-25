@@ -72,11 +72,12 @@ interface Versions {
   [versionNumber: string]: VersionInfo;
 }
 
-export interface PackageDetails {
+export interface NpmPackageDetails {
   _id: string;
   _rev: string;
   name: string;
   description: string;
+  'dist-tags': { latest: string };
   versions: Versions;
   readme: string;
   maintainers: NpmUser[];

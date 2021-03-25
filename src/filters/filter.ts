@@ -1,5 +1,5 @@
-import { PackageDetails } from '../npm-interfaces/package-details';
+import { PackageDetail } from '../package-detail';
 
 export default interface Filter {
-  filter(packageDetails: PackageDetails): boolean;
+  filter(packageDetails: PackageDetail): boolean;
 }

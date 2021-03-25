@@ -1,5 +1,5 @@
 {
-  "name": "package-upgrade-helper",
+  "name": "package-upgrade-advisor",
   "author": {
     "email": "ryan.tablada+npm@gmail.com",
     "name": "Ryan Tablada"
@@ -8,7 +8,7 @@
     "build:dev": "tsc -p tsconfig.json --watch"
   },
   "bin": {
-    "package-upgrade-helper": "bin.js"
+    "package-upgrade-advisor": "bin.js"
   },
   "version": "1.0.0",
   "main": "dist/index.js",
@@ -24,8 +24,13 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "cli-color": "^2.0.0",
+    "cli-table": "^0.3.6",
+    "cliui": "^7.0.4",
     "json-to-ts": "^1.7.0",
+    "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
+    "semver": "^7.3.5",
     "yargs": "^16.2.0"
   }
 }
