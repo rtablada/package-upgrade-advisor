@@ -3,7 +3,7 @@ import { existsSync } from 'fs';
 import { PackageUpgraderConfig } from '..';
 
 export default function runAdvisor() {
-  const configPath = join(process.cwd(), '/.package-upgrade.js');
+  const configPath = join(process.cwd(), '/.package-advisor.js');
   const packagePath = join(process.cwd(), '/package.json');
 
   if (!existsSync(configPath)) {

@@ -25,7 +25,7 @@ interface PackageJson {
 interface PackageUpgraderConfigOptions {
   defaultOutputType: 'csv' | 'console' | undefined;
   filters: FilterClass[];
-  displayTable: OutputColumn[];
+  displayColumns: OutputColumn[];
 }
 
 export class PackageUpgraderConfig {
@@ -71,12 +71,12 @@ export class PackageUpgraderConfig {
 
   printToConsole(filteredPackages: PackageDetail[]) {
     const table = new Table({
-      head: this.options.displayTable.map((c) => c.headerText),
+      head: this.options.displayColumns.map((c) => c.headerText),
     });
 
     for (let i = 0; i < filteredPackages.length; i++) {
       const p = filteredPackages[i];
-      table.push(this.options.displayTable.map((c) => c.getRowText(p)));
+      table.push(this.options.displayColumns.map((c) => c.getRowText(p)));
     }
 
     console.log(table.toString());
