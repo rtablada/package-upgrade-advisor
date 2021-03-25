@@ -1,5 +1,4 @@
 import semver from 'semver';
-import npm from 'npm';
 import { NpmPackageDetails } from '../npm-interfaces/package-details';
 import { PackageDetail } from '../package-detail';
 
@@ -31,7 +30,7 @@ export class RequiredVersionColumn extends OutputColumn {
   headerText = 'Required Version';
 
   getRowText(detail: PackageDetail): string {
-    return detail.requestedVersion;
+    return detail.arboristNode.version;
   }
 
   getStatus = () => undefined;
@@ -94,14 +93,26 @@ export class DependencyColumn extends OutputColumn {
     return this.packageName;
   }
 
-  private getDependencyVersion(detail: PackageDetail, version: string) {
-    const versionInfo = detail.npmDetails.versions[version];
+  private getCurrentVersion(detail: PackageDetail) : string | undefined {
+    const packageName = detail.arboristNode?.resolve(this.packageName);
 
-    return (versionInfo.dependencies ?? {})[this.packageName] ?? (versionInfo.devDependencies ?? {})[this.packageName] ?? 'N/A';
+    return packageName?.version;
+  }
+
+  private getLatestVersion(detail: PackageDetail) : string {
+    const packageData = detail.npmDetails.versions[detail.arboristNode.version];
+
+    return packageData?.version;
   }
 
   getRowText(detail: PackageDetail): string {
-    return this.getDependencyVersion(detail, detail.requestedVersion);
+    const currentVersion = this.getCurrentVersion(detail);
+
+    if (currentVersion === undefined) {
+      return 'N/A';
+    }
+
+    return `${currentVersion} ~> ${this.getLatestVersion(detail)}`;
   }
 
   getStatus(detail: PackageDetail): 'success' | 'alert' | 'caution' | 'warning' | 'highlight' {

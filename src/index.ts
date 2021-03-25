@@ -1,10 +1,10 @@
 import fetch from 'node-fetch';
 import Table from 'cli-table';
-import npm from 'npm';
+import Arborist from '@npmcli/arborist';
 import Filter from './filters/filter';
 import { NpmPackageDetails } from './npm-interfaces/package-details';
 import { OutputColumn } from './output-columns';
-import { PackageDetail } from './package-detail';
+import { ArboristNode, PackageDetail } from './package-detail';
 
 export { default as OptionsFilter } from './filters/options-filter';
 export * from './output-columns';
@@ -33,19 +33,23 @@ export class PackageUpgraderConfig {
 
   filters: Filter[];
 
+  arborist: any;
+
+  tree: ArboristNode;
+
   constructor(options: PackageUpgraderConfigOptions) {
     this.options = options;
     this.filters = options.filters.map((F) => new F());
+    this.arborist = new Arborist();
   }
 
   async run(
     packageJson: PackageJson,
     outputType: 'csv' | 'console' = this.options.defaultOutputType ?? 'console',
   ) {
-    await new Promise((resolve) => npm.load(resolve));
     const packageDetails = [
       ...(await this.packageDetails(packageJson.dependencies, 'dependencies')),
-      ...(await this.packageDetails(packageJson.devDependencies, 'dev-dependencies')),
+      ...(await this.packageDetails(packageJson.devDependencies, 'devDependencies')),
     ];
 
     const filteredPackages = this.filters
@@ -84,11 +88,14 @@ export class PackageUpgraderConfig {
   ) : Promise<PackageDetail[]> {
     const packageNames = Object.keys(dependencies);
 
+    this.tree = await this.arborist.loadActual();
+
     return Promise.all(packageNames.map(async (packageName) => ({
       packageName,
       requestedVersion: dependencies[packageName],
       dependencyType,
       npmDetails: await this.loadNpmDetails(packageName),
+      arboristNode: this.tree.resolve(packageName),
     })));
   }
 

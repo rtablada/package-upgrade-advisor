@@ -10,7 +10,7 @@
   "bin": {
     "package-upgrade-advisor": "bin.js"
   },
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "license": "MIT",
   "devDependencies": {
@@ -24,7 +24,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "cli-color": "^2.0.0",
+    "@npmcli/arborist": "^2.2.9",
     "cli-table": "^0.3.6",
     "cliui": "^7.0.4",
     "json-to-ts": "^1.7.0",
