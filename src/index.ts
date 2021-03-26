@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import Table from 'cli-table';
 import Arborist from '@npmcli/arborist';
+import npmfetch from 'npm-registry-fetch';
 import Filter from './filters/filter';
 import { NpmPackageDetails } from './npm-interfaces/package-details';
 import { OutputColumn } from './output-columns';
@@ -99,9 +100,7 @@ export class PackageUpgraderConfig {
     })));
   }
 
-  async loadNpmDetails(packageName: string): Promise<NpmPackageDetails> {
-    const res = await fetch(`https://registry.npmjs.org/${packageName}`);
-
-    return res.json() as Promise<NpmPackageDetails>;
+  loadNpmDetails(packageName: string): Promise<NpmPackageDetails> {
+    return npmfetch.json(packageName) as Promise<NpmPackageDetails>;
   }
 }
