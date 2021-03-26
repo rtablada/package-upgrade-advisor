@@ -14,7 +14,9 @@
     "url": "git+https://github.com/rtablada/package-upgrade-helper.git"
   },
   "scripts": {
-    "build:dev": "tsc -p tsconfig.json --watch"
+    "build": "tsc -p tsconfig.json",
+    "build:dev": "tsc -p tsconfig.json --watch",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "package-upgrade-advisor": "bin.js"
@@ -36,6 +38,7 @@
     "@npmcli/arborist": "^2.2.9",
     "cli-table": "^0.3.6",
     "cliui": "^7.0.4",
+    "colors": "^1.4.0",
     "json-to-ts": "^1.7.0",
     "moment": "^2.29.1",
     "npm-registry-fetch": "^9.0.0",

@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     'import/extensions': 0,
     'import/no-unresolved': 0,
+    'import/prefer-default-export': 0,
     'class-methods-use-this': 0,
     'no-shadow': 0,
     'max-classes-per-file': 0,

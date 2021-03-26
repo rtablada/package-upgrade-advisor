@@ -1,6 +1,11 @@
 const {
   PackageUpgraderConfig,
-  OptionsFilter, PackageNameColumn, DependencyColumn, RequiredVersionColumn, LatestVersionColumn,
+  OptionsFilter,
+  PackageNameColumn,
+  DependencyColumn,
+  RequiredVersionColumn,
+  LatestVersionColumn,
+  PublishDateColumn,
 } = require('package-upgrade-advisor');
 
 module.exports = new PackageUpgraderConfig({
@@ -46,6 +51,8 @@ module.exports = new PackageUpgraderConfig({
     new RequiredVersionColumn(),
     // Show the latest version of this package available from NPM
     new LatestVersionColumn(),
+    // Show publish date of required and latest versions
+    new PublishDateColumn(),
     // Show child dependencies on lodash
     // and the version used (and the version used by the latest version)
     // new DependencyColumn('lodash'),
