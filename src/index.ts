@@ -8,6 +8,7 @@ import { NpmPackageDetails } from './npm-interfaces/package-details';
 import { OutputColumn, RowStatus } from './output-columns';
 import { ArboristNode, PackageDetail } from './package-detail';
 
+export { default as EmberCoreAddonsFilter } from './filters/ember-core-addons-filter';
 export { default as OptionsFilter } from './filters/options-filter';
 export * from './output-columns';
 
