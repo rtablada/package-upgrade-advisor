@@ -127,3 +127,12 @@ This is the output from running `package-upgrade-advisor` on this project!
 │ typescript                       │ 4.2.3            │ 4.2.3                    │ 4.17.21 ~> 4.2.3  │
 └──────────────────────────────────┴──────────────────┴──────────────────────────┴───────────────────┘
 ```
+
+### Upcoming Features
+
+These are not in any particular order:
+
+* Bug in child dependency versions... It is getting the top level node resolved version...
+* Row highlighting (easily identify which packages are causing the worst problems)
+* Row sorting (sort by a given column or alert status)
+* CSV output
