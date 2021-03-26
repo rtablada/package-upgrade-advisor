@@ -1,8 +1,17 @@
 {
   "name": "package-upgrade-advisor",
+  "description": "A CLI tool for visualizing your package upgrade path!",
+  "version": "0.0.1",
   "author": {
     "email": "ryan.tablada+npm@gmail.com",
     "name": "Ryan Tablada"
+  },
+  "bugs": {
+    "url": "https://github.com/rtablada/package-upgrade-helper/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtablada/package-upgrade-helper.git"
   },
   "scripts": {
     "build:dev": "tsc -p tsconfig.json --watch"
@@ -10,7 +19,6 @@
   "bin": {
     "package-upgrade-advisor": "bin.js"
   },
-  "version": "0.0.1",
   "main": "dist/index.js",
   "license": "MIT",
   "devDependencies": {
